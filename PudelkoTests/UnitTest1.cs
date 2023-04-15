@@ -472,7 +472,7 @@ namespace PudelkoUnitTests
         public void ImplicitConversion_FromAalueTuple_As_Pudelko_InMilimeters()
         {
             var (a, b, c) = (2500, 9321, 100); // in milimeters, ValueTuple
-            PudelkoModel p = (a, b, c);
+            PudelkoModel p = (a, b, c, UnitOfMeasure.milimeter);
             Assert.AreEqual((int)(p.A * 1000), a);
             Assert.AreEqual((int)(p.B * 1000), b);
             Assert.AreEqual((int)(p.C * 1000), c);

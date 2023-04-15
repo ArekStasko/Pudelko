@@ -5,7 +5,7 @@ namespace Pudelko;
 
 public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<double>
 {
-    private UnitOfMeasure? _unit = UnitOfMeasure.milimeter;
+    private UnitOfMeasure? _unit = UnitOfMeasure.meter;
     private double a = 0.1;
     private double b = 0.1;
     private double c = 0.1;
@@ -84,7 +84,7 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
 
     private double CheckCondition(double num)
     {
-        if (num < 0.1) throw new ArgumentOutOfRangeException();
+        if (num <= 0.1) throw new ArgumentOutOfRangeException();
         
         double unit = _unit switch
         {
