@@ -5,7 +5,7 @@ namespace Pudelko;
 
 public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<double>
 {
-    private UnitOfMeasure? _unit;
+    private UnitOfMeasure? _unit = UnitOfMeasure.milimeter;
     private double a = 0.1;
     private double b = 0.1;
     private double c = 0.1;
@@ -84,7 +84,7 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
 
     private double CheckCondition(double num)
     {
-        if (num <= 0.1) throw new ArgumentOutOfRangeException();
+        if (num < 0.1) throw new ArgumentOutOfRangeException();
         
         double unit = _unit switch
         {
@@ -175,21 +175,22 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
             return ToString("m");
         }
 
-        public string ToString(string format)
+        public string ToString(string? format)
         {
             return ToString(format, null);
         }
 
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider formatProvider)
         {
-            switch (format)
+            var formatType = format ?? "m";
+            switch (formatType)
             {
                 case "cm": 
-                    return $"{A * 100} cm x {B * 100} cm x {C * 100} cm"; // no rounding
+                    return $"{String.Format("{0:0.0}", A * 100)} cm × {String.Format("{0:0.0}", B * 100)} cm × {String.Format("{0:0.0}", C * 100)} cm";
                 case "mm":
-                    return $"{A * 1000} mm x {B * 1000} mm x {C * 1000} mm";
+                    return $"{A * 1000} mm × {B * 1000} mm × {C * 1000} mm";
                 case "m": 
-                    return $"{A} m x {B} m x {C} m";
+                    return $"{String.Format("{0:0.000}", A)} m × {String.Format("{0:0.000}", B)} m × {String.Format("{0:0.000}", C)} m";
                 default:
                     throw new FormatException();
             }

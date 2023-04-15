@@ -415,7 +415,7 @@ namespace PudelkoUnitTests
         [TestMethod, TestCategory("String representation")]
         public void ToString_Default_Culture_EN()
         {
-            var p = new PudelkoModel(2.5, 9.321);
+            var p = new PudelkoModel(2.5, 9.321, UnitOfMeasure.meter);
             string expectedStringEN = "2.500 m × 9.321 m × 0.100 m";
 
             Assert.AreEqual(expectedStringEN, p.ToString());
