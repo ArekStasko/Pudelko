@@ -9,13 +9,16 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
     private double a = 0.1;
     private double b = 0.1;
     private double c = 0.1;
+    private double[] parts = new double[3];
 
     public double A
     {
         get => a;
         set
         {
-            a = CheckCondition(value);
+            double checkValue = CheckCondition(value);
+            a = checkValue;
+            parts[0] = checkValue;
         }
     }
 
@@ -24,7 +27,9 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
         get => b;
         set
         {
-           b = CheckCondition(value);
+            double checkValue = CheckCondition(value);
+            b = checkValue;
+            parts[1] = checkValue;
         }
     }
 
@@ -33,7 +38,9 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
         get => c;
         set
         {
-            c = CheckCondition(value);
+            double checkValue = CheckCondition(value);
+            c = checkValue;
+            parts[2] = checkValue;
         }
     }
 
@@ -233,17 +240,15 @@ public class PudelkoModel: IFormattable, IEquatable<PudelkoModel>, IEnumerable<d
           );
         }
 
-
-        List<double> odcinki = new List<double> { 5.0, 6.0, 7.0 }; 
         public IEnumerator<double> GetEnumerator()
         {
-            foreach (var x in odcinki)
+            foreach (var x in parts)
             {
                 yield return x;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => odcinki.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => parts.GetEnumerator();
 
         public static PudelkoModel Parsowanie(string parse)
         {
